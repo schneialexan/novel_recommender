@@ -128,16 +128,16 @@ if __name__ == "__main__":
         persona = st.session_state.persona
         history = st.session_state.history
         if st.button("Generate Synthetic History"):
-            st.session_state.history = generate_user_history(persona)
+            # random between 0 and 10
+            num_of_history = random.randint(0, 10)
+            st.session_state.history = generate_user_history(persona, num_of_history)
             st.write("Generated History:")
             for book in st.session_state.history:
                 book_id = df[df['name'] == book]['id'].values[0]
                 st.write(f"[{book}]({'http://www.novelupdates.com/?p=' + f'{book_id}'})")
             
         if st.button("Recommend"):
-            # random between 0 and 10
-            num_of_history = random.randint(0, 10)
-            recommended_books = get_user_history_recommendations(history.to_list(), makeDataset(file_name), num_of_history)
+            recommended_books = get_user_history_recommendations(history.to_list(), makeDataset(file_name))
             if len(history) > 0:
                 st.write("History:")
                 for book in history:
