@@ -32,7 +32,7 @@ def get_user_recommendations(user, user_history, data, cosine_sim, top_n=5):
         return "User not found in the user history."
     
     user_books = user_history[user]
-    
+    print(f"User history for {user}: \n{user_books}\n")
     # Create an empty array to store the sum of cosine similarity scores
     sum_sim_scores = [0] * len(data)
 

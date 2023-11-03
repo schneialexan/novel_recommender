@@ -21,8 +21,6 @@ def get_recommendations(book_name, cosine_sim=cosine_sim):
     book_indices = [x[0] for x in similar_books]
     return data['name'].iloc[book_indices]
 
-
-# Example: Get recommendations for a specific novel
 book_name = "Reborn into Naruto World with Tenseigan"
 recommendations = get_recommendations(book_name)
 print(recommendations)
