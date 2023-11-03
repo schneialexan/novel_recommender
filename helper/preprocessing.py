@@ -1,6 +1,6 @@
 import pandas as pd
 
-def makeDataset(path='data/novels_0.1.3.csv'):
+def makeDataset(path='novels_0.1.3.csv'):
     # Load the data into a DataFrame
     data = pd.read_csv(path)
 
