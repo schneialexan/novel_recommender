@@ -7,7 +7,7 @@ from helper.preprocessing import makeDataset
 st.set_page_config(layout="wide", page_title="Persona-Based Book Recommendation")
 
 version = '0.1.3'
-path = ''
+path = 'data/'
 file_name = path + 'novels_' + version + '.csv'
 df = pd.read_csv(file_name)
 
@@ -50,7 +50,6 @@ def get_user_history_recommendations(user_books, data, top_n=5):
     tfidf_vectorizer = TfidfVectorizer(stop_words='english')
     tfidf_matrix = tfidf_vectorizer.fit_transform(data['combined_features'])
     
-    print(f"User history: \n{user_books}\n")
     # Calculate the cosine similarity between user_books and all books
     user_books_vector = tfidf_vectorizer.transform(user_books)
     cosine_sim = linear_kernel(user_books_vector, tfidf_matrix)
@@ -76,7 +75,7 @@ def get_user_history_recommendations(user_books, data, top_n=5):
     return data['name'].iloc[book_indices]
 
 def generate_user_history(persona):
-    return get_persona_recommendations(persona, makeDataset())
+    return get_persona_recommendations(persona, makeDataset(file_name))
 
 
 if __name__ == "__main__":
@@ -117,8 +116,7 @@ if __name__ == "__main__":
             if persona.get('preferred_genres') is None or persona.get('preferred_tags') is None or persona.get('preferred_languages') is None:
                 st.write("Please generate a persona before recommending books.")
             else:
-                print(f'Generating recommendations...')
-                recommended_books = get_persona_recommendations(persona, makeDataset())
+                recommended_books = get_persona_recommendations(persona, makeDataset(file_name))
                 st.write("Recommended Books:")
                 for book in recommended_books:
                     book_id = df[df['name'] == book]['id'].values[0]
@@ -136,7 +134,7 @@ if __name__ == "__main__":
                 st.write(f"[{book}]({'http://www.novelupdates.com/?p=' + f'{book_id}'})")
             
         if st.button("Recommend"):
-            recommended_books = get_user_history_recommendations(history.to_list(), makeDataset())
+            recommended_books = get_user_history_recommendations(history.to_list(), makeDataset(file_name))
             if len(history) > 0:
                 st.write("History:")
                 for book in history:
