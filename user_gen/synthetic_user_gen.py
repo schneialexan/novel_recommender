@@ -1,4 +1,3 @@
-from enum import unique
 import streamlit as st
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -55,10 +54,8 @@ def get_user_history_recommendations(user_books, data, top_n=5):
     # Calculate the cosine similarity between user_books and all books
     user_books_vector = tfidf_vectorizer.transform(user_books)
     cosine_sim = linear_kernel(user_books_vector, tfidf_matrix)
-    print(f"cosine_sim: \n{cosine_sim}\n")
     # Create an empty array to store the sum of cosine similarity scores
     sum_sim_scores = [0] * len(data)
-
     # Calculate the sum of cosine similarity scores for each book the user has read
     for i in range(len(user_books)):
         sum_sim_scores += cosine_sim[i]
