@@ -75,8 +75,8 @@ def get_user_history_recommendations(user_books, data, top_n=5):
     # Return the top N recommended books
     return data['name'].iloc[book_indices]
 
-def generate_user_history(persona):
-    return get_persona_recommendations(persona, makeDataset(file_name))
+def generate_user_history(persona, num_of_history):
+    return get_persona_recommendations(persona, makeDataset(file_name), num_of_history)
 
 
 if __name__ == "__main__":
