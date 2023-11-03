@@ -1,3 +1,4 @@
+import random
 import streamlit as st
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -134,7 +135,9 @@ if __name__ == "__main__":
                 st.write(f"[{book}]({'http://www.novelupdates.com/?p=' + f'{book_id}'})")
             
         if st.button("Recommend"):
-            recommended_books = get_user_history_recommendations(history.to_list(), makeDataset(file_name))
+            # random between 0 and 10
+            num_of_history = random.randint(0, 10)
+            recommended_books = get_user_history_recommendations(history.to_list(), makeDataset(file_name), num_of_history)
             if len(history) > 0:
                 st.write("History:")
                 for book in history:
