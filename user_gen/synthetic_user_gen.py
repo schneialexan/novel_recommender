@@ -131,7 +131,7 @@ if __name__ == "__main__":
         history = st.session_state.history
         if st.button("Generate Synthetic History"):
             # random between 0 and 10
-            num_of_history = random.randint(0, 10)
+            num_of_history = random.randint(3, 15)
             st.session_state.history = generate_user_history(persona, num_of_history)
             st.write("Generated History:")
             for book in st.session_state.history:
