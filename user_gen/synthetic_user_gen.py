@@ -76,7 +76,9 @@ def get_user_history_recommendations(user_books, data, top_n=5):
     return data['name'].iloc[book_indices]
 
 def generate_user_history(persona, num_of_history):
-    return get_persona_recommendations(persona, makeDataset(file_name), num_of_history)
+    num = 100
+    recommendations = get_persona_recommendations(persona, makeDataset(file_name), num)
+    return recommendations.sample(num_of_history).to_list()
 
 
 if __name__ == "__main__":
@@ -137,7 +139,7 @@ if __name__ == "__main__":
                 st.write(f"[{book}]({'http://www.novelupdates.com/?p=' + f'{book_id}'})")
             
         if st.button("Recommend"):
-            recommended_books = get_user_history_recommendations(history.to_list(), makeDataset(file_name))
+            recommended_books = get_user_history_recommendations(history, makeDataset(file_name))
             if len(history) > 0:
                 st.write("History:")
                 for book in history:
