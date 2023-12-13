@@ -15,9 +15,7 @@ data['rating'] = data['rating'].astype(float)
 
 data['combined_features'] = data['name'] + ' ' + data['authors'].apply(lambda x: ' '.join(x)) + ' ' + data['genres'].apply(lambda x: ' '.join(x)) + ' ' + data['tags'].apply(lambda x: ' '.join(x))
 
-# Create a user-book interaction matrix (replace with actual user data if available)
-# Rows represent users, columns represent books, and values represent user ratings
-# For simplicity, I'll use a random matrix in this example
+# Collaborative Filtering
 user_data = {
     'User1': [4.0, 0, 3.0, 0, 0],
     'User2': [0, 0, 5.0, 4.0, 0],
